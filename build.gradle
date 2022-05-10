@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+repositories {
+    maven {
+        url "$SPRING_ARTIFACTORY_BASE_URL/release"
+    }
+}
+
+dependencies {
+    // Supported by Renovate
+    implementation(group: 'org.springframework', name: 'spring-jcl', version: SPRING_VERSION)
+
+    // Not supported by Renovate
+    implementation(group: 'org.springframework', name: 'spring-beans', version: SPRING_VERSION, classifier: 'sources')
+
+    // Not supported by Renovate
+    implementation(group: 'org.springframework', name: 'spring-expression', version: SPRING_VERSION) {
+        exclude module: 'spring-jcl'
+    }
+}
